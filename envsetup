@@ -4,7 +4,7 @@ set -euo pipefail
 
 BASE_DIR="$(dirname "$(readlink -f "${0}")")"
 
-IMAGE="ghcr.io/servercontainers/samba:a3.22.1-s4.21.4-r4"
+IMAGE="ghcr.io/servercontainers/samba:a3.24.1-s4.23.8-r0"
 
 get_samba_hash_line() {
   local regex
