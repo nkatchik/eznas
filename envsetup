@@ -22,6 +22,5 @@ HASH_LINE="$(get_samba_hash_line)"
 
 ENV_FILE_PATH="${BASE_DIR}/.env"
 rm -f "${ENV_FILE_PATH}"
-echo "HOSTNAME=$(hostname)" >> "${ENV_FILE_PATH}"
 echo "SMB_USER=$(echo "${HASH_LINE}" | cut -d: -f1)" >> "${ENV_FILE_PATH}"
 echo "SMB_HASH_LINE=${HASH_LINE}" >> "${ENV_FILE_PATH}"
