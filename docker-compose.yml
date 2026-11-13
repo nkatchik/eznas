@@ -77,7 +77,7 @@ services:
     environment:
       - "ACCOUNT_${SMB_USER}=${SMB_HASH_LINE}"
       - "SAMBA_CONF_WORKGROUP=WORKGROUP"
-      - "SAMBA_VOLUME_CONFIG_media=[media]; path = /shares; read only = no; browseable = yes; guest ok = no; vfs objects = catia fruit streams_xattr"
+      - "SAMBA_VOLUME_CONFIG_media=[media]; path = /shares; read only = no; browseable = yes; guest ok = no; vfs objects = catia fruit streams_xattr; dfree command = /usr/local/bin/eznas-dfree"
       - "TZ=Europe/London"
       - "UID_${SMB_USER}=1000"
     tmpfs:
@@ -87,6 +87,12 @@ services:
       - /var/log/samba
     volumes:
       - samba_state:/var/lib/samba
+      - type: bind
+        source: ./data/samba/dfree.sh
+        target: /usr/local/bin/eznas-dfree
+        read_only: true
+        bind:
+          create_host_path: false
       # Export SMB discovery to host Avahi; this disables the image's daemon.
       # AVAHI_DISABLE would also prevent the service file from being exported.
       - type: bind
